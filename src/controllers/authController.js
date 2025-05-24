@@ -3,7 +3,7 @@ const { User } = require('../models/Model');
 const { Op } = require('sequelize');
 
 const generateToken = (user) => {
-  return jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+  return jwt.sign({ id: user.id }, process.env.JWT_SECRET || 'your-secret-key', {
     expiresIn: '2h'
   });
 };

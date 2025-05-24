@@ -1,6 +1,6 @@
 ### Variables
 @baseUrl = http://localhost:5000
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzQ4MDk5NzcyLCJleHAiOjE3NDgxMDY5NzJ9.S47Ckhyf3Zxy1ZWk_hUdfXnE3TH6M-WT_Eb3_ch9NeQ
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzQ4MDk5NjQyLCJleHAiOjE3NDg3MDQ0NDJ9.Pxv2xwWJnjYs7NqYKZIgNdOx_-oN8IxdodfcWHOTGqk
 
 ### Authentication ###
 
