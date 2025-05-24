@@ -23,7 +23,7 @@ const Transaction = sequelize.define('Transaction', {
       key: 'id'
     }
   },
-  symbol: {
+  coin_name: {
     type: DataTypes.STRING,
     allowNull: false
   },

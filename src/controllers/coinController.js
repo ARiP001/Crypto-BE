@@ -33,9 +33,9 @@ const getTopCoins = async (req, res) => {
 
 const getCoinDetail = async (req, res) => {
   try {
-    const { symbol } = req.params;
+    const { coin_name } = req.params;
     const response = await axios.get(
-      `https://api.coingecko.com/api/v3/coins/${symbol.toLowerCase()}`,
+      `https://api.coingecko.com/api/v3/coins/${coin_name.toLowerCase()}`,
       {
         params: {
           localization: false,
@@ -70,11 +70,11 @@ const getCoinDetail = async (req, res) => {
 
 const getCoinHistory = async (req, res) => {
   try {
-    const { symbol } = req.params;
+    const { coin_name } = req.params;
     const { days = 7 } = req.query;
 
     const response = await axios.get(
-      `https://api.coingecko.com/api/v3/coins/${symbol.toLowerCase()}/market_chart`,
+      `https://api.coingecko.com/api/v3/coins/${coin_name.toLowerCase()}/market_chart`,
       {
         params: {
           vs_currency: 'usd',

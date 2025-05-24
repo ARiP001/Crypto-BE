@@ -4,7 +4,7 @@ const { Op } = require('sequelize');
 
 const generateToken = (user) => {
   return jwt.sign({ id: user.id }, process.env.JWT_SECRET || 'your-secret-key', {
-    expiresIn: '7d'
+    expiresIn: '2h'
   });
 };
 
@@ -33,7 +33,7 @@ const register = async (req, res) => {
     res.cookie('token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+      maxAge: 2 * 60 * 60 * 1000 // 2 hours
     });
 
     res.status(201).json({
@@ -69,7 +69,7 @@ const login = async (req, res) => {
     res.cookie('token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+      maxAge: 2 * 60 * 60 * 1000 // 2 hours
     });
 
     res.json({

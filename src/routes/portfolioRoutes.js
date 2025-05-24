@@ -10,7 +10,7 @@ const {
 
 router.get('/', auth, getPortfolio);
 router.post('/', auth, createPortfolio);
-router.put('/:symbol', auth, updatePortfolio);
-router.delete('/:symbol', auth, deletePortfolio);
+router.put('/:coin_name', auth, updatePortfolio);
+router.delete('/:coin_name', auth, deletePortfolio);
 
 module.exports = router; 

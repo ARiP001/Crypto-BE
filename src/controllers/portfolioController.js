@@ -8,13 +8,13 @@ const getPortfolio = async (req, res) => {
     });
 
     // Get current prices from CoinGecko
-    const symbols = portfolios.map(p => p.symbol.toLowerCase());
+    const coinNames = portfolios.map(p => p.coin_name.toLowerCase());
     const prices = await axios.get(
-      `https://api.coingecko.com/api/v3/simple/price?ids=${symbols.join(',')}&vs_currencies=usd`
+      `https://api.coingecko.com/api/v3/simple/price?ids=${coinNames.join(',')}&vs_currencies=usd`
     );
 
     const portfoliosWithPrices = portfolios.map(portfolio => {
-      const price = prices.data[portfolio.symbol.toLowerCase()]?.usd || 0;
+      const price = prices.data[portfolio.coin_name.toLowerCase()]?.usd || 0;
       return {
         ...portfolio.toJSON(),
         current_price: price,
@@ -30,12 +30,12 @@ const getPortfolio = async (req, res) => {
 
 const createPortfolio = async (req, res) => {
   try {
-    const { symbol, total_coin, image_url } = req.body;
+    const { coin_name, total_coin, image_url } = req.body;
 
     const existingPortfolio = await Portfolio.findOne({
       where: {
         user_id: req.user.id,
-        symbol
+        coin_name
       }
     });
 
@@ -45,7 +45,7 @@ const createPortfolio = async (req, res) => {
 
     const portfolio = await Portfolio.create({
       user_id: req.user.id,
-      symbol,
+      coin_name,
       total_coin,
       image_url
     });
@@ -58,13 +58,13 @@ const createPortfolio = async (req, res) => {
 
 const updatePortfolio = async (req, res) => {
   try {
-    const { symbol } = req.params;
+    const { coin_name } = req.params;
     const { total_coin } = req.body;
 
     const portfolio = await Portfolio.findOne({
       where: {
         user_id: req.user.id,
-        symbol
+        coin_name
       }
     });
 
@@ -83,12 +83,12 @@ const updatePortfolio = async (req, res) => {
 
 const deletePortfolio = async (req, res) => {
   try {
-    const { symbol } = req.params;
+    const { coin_name } = req.params;
 
     const portfolio = await Portfolio.findOne({
       where: {
         user_id: req.user.id,
-        symbol
+        coin_name
       }
     });
 

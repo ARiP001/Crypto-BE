@@ -1,6 +1,6 @@
 ### Variables
-@baseUrl = http://localhost:3000
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzQ4MDgwMDMwLCJleHAiOjE3NDg2ODQ4MzB9.hwAl-5_TpqDsXBEVSmgrH4N2_OT4uleIfgZKfC6aKhM
+@baseUrl = http://localhost:5000
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzQ4MDk5NzcyLCJleHAiOjE3NDgxMDY5NzJ9.S47Ckhyf3Zxy1ZWk_hUdfXnE3TH6M-WT_Eb3_ch9NeQ
 
 ### Authentication ###
 
@@ -9,9 +9,9 @@ POST {{baseUrl}}/auth/register
 Content-Type: application/json
 
 {
-    "username": "testuser",
-    "email": "test@example.com",
-    "password": "password123"
+    "username": "John Doe",
+    "email": "johndoe@gmail.com",
+    "password": "johndoe123"
 }
 
 ### Login
@@ -19,8 +19,8 @@ POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
 {
-    "email": "test@example.com",
-    "password": "password123"
+    "email": "johndoe@gmail.com",
+    "password": "johndoe123"
 }
 
 ### Logout
@@ -68,13 +68,13 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-    "symbol": "BTC",
+    "coin_name": "bitcoin",
     "total_coin": 0.5,
     "image_url": "https://assets.coingecko.com/coins/images/1/large/bitcoin.png"
 }
 
 ### Update portfolio
-PUT {{baseUrl}}/portfolio/BTC
+PUT {{baseUrl}}/portfolio/bitcoin
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
@@ -83,7 +83,7 @@ Content-Type: application/json
 }
 
 ### Delete portfolio
-DELETE {{baseUrl}}/portfolio/BTC
+DELETE {{baseUrl}}/portfolio/bitcoin
 Authorization: Bearer {{token}}
 
 ### Transactions ###
@@ -98,7 +98,7 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-    "symbol": "bitcoin",
+    "coin_name": "bitcoin",
     "amount_usd": 1000
 }
 
@@ -108,11 +108,11 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-    "symbol": "bitcoin",
+    "coin_name": "bitcoin",
     "amount_coin": 0.0001
 }
 
-### Update transaction (admin only)
+### Update transaction
 PUT {{baseUrl}}/transactions/1
 Authorization: Bearer {{token}}
 Content-Type: application/json
@@ -121,10 +121,10 @@ Content-Type: application/json
     "amount_coin": 0.2,
     "total_value": 2000,
     "type": "buy",
-    "symbol": "BTC"
+    "coin_name": "bitcoin"
 }
 
-### Delete transaction (admin only)
+### Delete transaction
 DELETE {{baseUrl}}/transactions/1
 Authorization: Bearer {{token}}
 

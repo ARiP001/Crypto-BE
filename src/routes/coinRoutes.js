@@ -8,7 +8,7 @@ const {
 } = require('../controllers/coinController');
 
 router.get('/', auth, getTopCoins);
-router.get('/:symbol', auth, getCoinDetail);
-router.get('/:symbol/history', auth, getCoinHistory);
+router.get('/:coin_name', auth, getCoinDetail);
+router.get('/:coin_name/history', auth, getCoinHistory);
 
 module.exports = router; 

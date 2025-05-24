@@ -15,7 +15,7 @@ const Portfolio = sequelize.define('Portfolio', {
       key: 'id'
     }
   },
-  symbol: {
+  coin_name: {
     type: DataTypes.STRING,
     allowNull: false
   },
@@ -33,7 +33,7 @@ const Portfolio = sequelize.define('Portfolio', {
   indexes: [
     {
       unique: true,
-      fields: ['user_id', 'symbol']
+      fields: ['user_id', 'coin_name']
     }
   ]
 });

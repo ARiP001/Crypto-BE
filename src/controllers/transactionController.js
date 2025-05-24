@@ -16,16 +16,16 @@ const getTransactions = async (req, res) => {
 
 const buyCoin = async (req, res) => {
   try {
-    const { symbol, amount_usd } = req.body;
+    const { coin_name, amount_usd } = req.body;
 
     // Get current price from CoinGecko
     const priceResponse = await axios.get(
-      `https://api.coingecko.com/api/v3/simple/price?ids=${symbol.toLowerCase()}&vs_currencies=usd`
+      `https://api.coingecko.com/api/v3/simple/price?ids=${coin_name.toLowerCase()}&vs_currencies=usd`
     );
-    const currentPrice = priceResponse.data[symbol.toLowerCase()]?.usd;
+    const currentPrice = priceResponse.data[coin_name.toLowerCase()]?.usd;
 
     if (!currentPrice) {
-      return res.status(400).json({ error: 'Invalid coin symbol' });
+      return res.status(400).json({ error: 'Invalid coin name' });
     }
 
     const amountCoin = amount_usd / currentPrice;
@@ -43,16 +43,16 @@ const buyCoin = async (req, res) => {
     let portfolio = await Portfolio.findOne({
       where: {
         user_id: req.user.id,
-        symbol
+        coin_name
       }
     });
 
     if (!portfolio) {
       portfolio = await Portfolio.create({
         user_id: req.user.id,
-        symbol,
+        coin_name,
         total_coin: amountCoin,
-        image_url: `https://assets.coingecko.com/coins/images/1/large/${symbol.toLowerCase()}.png`
+        image_url: `https://assets.coingecko.com/coins/images/1/large/${coin_name.toLowerCase()}.png`
       });
     } else {
       portfolio.total_coin = parseFloat(portfolio.total_coin) + amountCoin;
@@ -63,7 +63,7 @@ const buyCoin = async (req, res) => {
     const transaction = await Transaction.create({
       user_id: req.user.id,
       portfolio_id: portfolio.id,
-      symbol,
+      coin_name,
       type: 'buy',
       amount_coin: amountCoin,
       total_value: amount_usd
@@ -77,23 +77,23 @@ const buyCoin = async (req, res) => {
 
 const sellCoin = async (req, res) => {
   try {
-    const { symbol, amount_coin } = req.body;
+    const { coin_name, amount_coin } = req.body;
 
     // Get current price from CoinGecko
     const priceResponse = await axios.get(
-      `https://api.coingecko.com/api/v3/simple/price?ids=${symbol.toLowerCase()}&vs_currencies=usd`
+      `https://api.coingecko.com/api/v3/simple/price?ids=${coin_name.toLowerCase()}&vs_currencies=usd`
     );
-    const currentPrice = priceResponse.data[symbol.toLowerCase()]?.usd;
+    const currentPrice = priceResponse.data[coin_name.toLowerCase()]?.usd;
 
     if (!currentPrice) {
-      return res.status(400).json({ error: 'Invalid coin symbol' });
+      return res.status(400).json({ error: 'Invalid coin name' });
     }
 
     const amountUsd = amount_coin * currentPrice;
     const portfolio = await Portfolio.findOne({
       where: {
         user_id: req.user.id,
-        symbol
+        coin_name
       }
     });
 
@@ -109,7 +109,6 @@ const sellCoin = async (req, res) => {
     portfolio.total_coin = parseFloat(portfolio.total_coin) - amount_coin;
     await portfolio.save();
     
-
     // Update user balance
     const user = await User.findByPk(req.user.id);
     user.balance = parseFloat(user.balance) + amountUsd;
@@ -119,7 +118,7 @@ const sellCoin = async (req, res) => {
     const transaction = await Transaction.create({
       user_id: req.user.id,
       portfolio_id: portfolio.id,
-      symbol,
+      coin_name,
       type: 'sell',
       amount_coin,
       total_value: amountUsd
@@ -134,7 +133,7 @@ const sellCoin = async (req, res) => {
 const updateTransaction = async (req, res) => {
   try {
     const { id } = req.params;
-    const { amount_coin, total_value, type, symbol } = req.body;
+    const { amount_coin, total_value, type, coin_name } = req.body;
 
     const transaction = await Transaction.findByPk(id);
     if (!transaction) {
@@ -144,7 +143,7 @@ const updateTransaction = async (req, res) => {
     if (amount_coin) transaction.amount_coin = amount_coin;
     if (total_value) transaction.total_value = total_value;
     if (type) transaction.type = type;
-    if (symbol) transaction.symbol = symbol;
+    if (coin_name) transaction.coin_name = coin_name;
 
     await transaction.save();
     res.json(transaction);
