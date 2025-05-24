@@ -1,4 +1,4 @@
-const { Portfolio } = require('../models');
+const { Portfolio } = require('../models/Model');
 const axios = require('axios');
 
 const getPortfolio = async (req, res) => {

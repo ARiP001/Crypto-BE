@@ -1,9 +1,9 @@
 const jwt = require('jsonwebtoken');
-const { User } = require('../models');
+const { User } = require('../models/Model');
 const { Op } = require('sequelize');
 
 const generateToken = (user) => {
-  return jwt.sign({ id: user.id }, process.env.JWT_SECRET || 'your-secret-key', {
+  return jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
     expiresIn: '2h'
   });
 };

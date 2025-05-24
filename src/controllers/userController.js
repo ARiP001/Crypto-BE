@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User } = require('../models/Model');
 const { Op } = require('sequelize');
 
 const getProfile = async (req, res) => {

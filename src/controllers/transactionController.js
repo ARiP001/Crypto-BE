@@ -1,4 +1,4 @@
-const { Transaction, Portfolio, User } = require('../models');
+const { Transaction, Portfolio, User } = require('../models/Model');
 const axios = require('axios');
 const { Op } = require('sequelize');
 
