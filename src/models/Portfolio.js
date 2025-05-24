@@ -11,7 +11,7 @@ const Portfolio = sequelize.define('Portfolio', {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'Users',
+      model: 'User',
       key: 'id'
     }
   },
@@ -30,6 +30,7 @@ const Portfolio = sequelize.define('Portfolio', {
   }
 }, {
   timestamps: false,
+  freezeTableName: true,
   indexes: [
     {
       unique: true,

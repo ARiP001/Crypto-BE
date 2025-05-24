@@ -11,7 +11,7 @@ const Transaction = sequelize.define('Transaction', {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'Users',
+      model: 'User',
       key: 'id'
     }
   },
@@ -19,7 +19,7 @@ const Transaction = sequelize.define('Transaction', {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'Portfolios',
+      model: 'Portfolio',
       key: 'id'
     }
   },
@@ -44,7 +44,8 @@ const Transaction = sequelize.define('Transaction', {
     defaultValue: DataTypes.NOW
   }
 }, {
-  timestamps: false
+  timestamps: false,
+  freezeTableName: true
 });
 
 module.exports = Transaction; 
