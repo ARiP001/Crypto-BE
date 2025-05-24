@@ -1,0 +1,35 @@
+steps:
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args: ['cp', 'gs://136_arif/.env', '.']
+
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      - "build"
+      - "-f"
+      - "Dockerfile"
+      - "-t"
+      - "gcr.io/$PROJECT_ID/tcc-be"
+      - "."
+
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/$PROJECT_ID/tcc-be"]
+
+  - name: "gcr.io/cloud-builders/gcloud"
+    args:
+      [
+        "run",
+        "deploy",
+        "crypto-backend",
+        "--image",
+        "gcr.io/$PROJECT_ID/tcc-be",
+        "--timeout",
+        "1000s",
+        "--port",
+        "7000",
+        "--region",
+        "us-central1",
+        "--allow-unauthenticated",
+      ]
+
+options:
+  logging: CLOUD_LOGGING_ONLY 
