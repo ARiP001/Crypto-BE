@@ -1,0 +1,143 @@
+### Variables
+@baseUrl = http://localhost:3000
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzQ4MDgwMDMwLCJleHAiOjE3NDg2ODQ4MzB9.hwAl-5_TpqDsXBEVSmgrH4N2_OT4uleIfgZKfC6aKhM
+
+### Authentication ###
+
+# Register new user
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "email": "test@example.com",
+    "password": "password123"
+}
+
+### Login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+    "email": "test@example.com",
+    "password": "password123"
+}
+
+### Logout
+POST {{baseUrl}}/auth/logout
+Authorization: Bearer {{token}}
+
+### User Profile ###
+
+# Get user profile
+GET {{baseUrl}}/users/me
+Authorization: Bearer {{token}}
+
+### Update profile
+PUT {{baseUrl}}/users/me
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "username": "ariffathurrahman",
+    "email": "arif@gmail.com"
+}
+
+### Update balance
+PUT {{baseUrl}}/users/me/balance
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "amount": 1000
+}
+
+### Delete account
+DELETE {{baseUrl}}/users/me
+Authorization: Bearer {{token}}
+
+### Portfolio ###
+
+# Get portfolio
+GET {{baseUrl}}/portfolio
+Authorization: Bearer {{token}}
+
+### Create portfolio
+POST {{baseUrl}}/portfolio
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "symbol": "BTC",
+    "total_coin": 0.5,
+    "image_url": "https://assets.coingecko.com/coins/images/1/large/bitcoin.png"
+}
+
+### Update portfolio
+PUT {{baseUrl}}/portfolio/BTC
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "total_coin": 1.0
+}
+
+### Delete portfolio
+DELETE {{baseUrl}}/portfolio/BTC
+Authorization: Bearer {{token}}
+
+### Transactions ###
+
+# Get transactions
+GET {{baseUrl}}/transactions
+Authorization: Bearer {{token}}
+
+### Buy coin
+POST {{baseUrl}}/transactions/buy
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "symbol": "bitcoin",
+    "amount_usd": 1000
+}
+
+### Sell coin
+POST {{baseUrl}}/transactions/sell
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "symbol": "bitcoin",
+    "amount_coin": 0.0001
+}
+
+### Update transaction (admin only)
+PUT {{baseUrl}}/transactions/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "amount_coin": 0.2,
+    "total_value": 2000,
+    "type": "buy",
+    "symbol": "BTC"
+}
+
+### Delete transaction (admin only)
+DELETE {{baseUrl}}/transactions/1
+Authorization: Bearer {{token}}
+
+### Coins ###
+
+# Get top coins
+GET {{baseUrl}}/coins
+Authorization: Bearer {{token}}
+
+### Get coin details
+GET {{baseUrl}}/coins/bitcoin
+Authorization: Bearer {{token}}
+
+### Get coin price history
+GET {{baseUrl}}/coins/bitcoin/history?days=7
+Authorization: Bearer {{token}} 
