@@ -8,8 +8,9 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:3000',
-    //BUAT FRONTEND NANTI MASUKIN SINI
+  origin: [
+    'http://localhost:3000',
+    'https://crypto-backend-21569344527.us-central1.run.app'
   ],
   credentials: true
 }));
