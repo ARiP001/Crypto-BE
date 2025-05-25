@@ -1,6 +1,7 @@
 const { Transaction, Portfolio, User } = require('../models/Model');
 const axios = require('axios');
 const { Op } = require('sequelize');
+const { COINGECKO_API_KEY } = require('../config/api');
 
 const getTransactions = async (req, res) => {
   try {
@@ -20,7 +21,13 @@ const buyCoin = async (req, res) => {
 
     // Get current price from CoinGecko
     const priceResponse = await axios.get(
-      `https://api.coingecko.com/api/v3/simple/price?ids=${coin_name.toLowerCase()}&vs_currencies=usd`
+      `https://api.coingecko.com/api/v3/simple/price?ids=${coin_name.toLowerCase()}&vs_currencies=usd`,
+      {
+        headers: {
+          'x-cg-demo-api-key': COINGECKO_API_KEY,
+          'accept': 'application/json'
+        }
+      }
     );
     const currentPrice = priceResponse.data[coin_name.toLowerCase()]?.usd;
 
@@ -81,7 +88,13 @@ const sellCoin = async (req, res) => {
 
     // Get current price from CoinGecko
     const priceResponse = await axios.get(
-      `https://api.coingecko.com/api/v3/simple/price?ids=${coin_name.toLowerCase()}&vs_currencies=usd`
+      `https://api.coingecko.com/api/v3/simple/price?ids=${coin_name.toLowerCase()}&vs_currencies=usd`,
+      {
+        headers: {
+          'x-cg-demo-api-key': COINGECKO_API_KEY,
+          'accept': 'application/json'
+        }
+      }
     );
     const currentPrice = priceResponse.data[coin_name.toLowerCase()]?.usd;
 

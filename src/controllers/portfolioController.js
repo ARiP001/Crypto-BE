@@ -1,5 +1,6 @@
 const { Portfolio } = require('../models/Model');
 const axios = require('axios');
+const { COINGECKO_API_KEY } = require('../config/api');
 
 const getPortfolio = async (req, res) => {
   try {
@@ -10,7 +11,13 @@ const getPortfolio = async (req, res) => {
     // Get current prices from CoinGecko
     const coinNames = portfolios.map(p => p.coin_name.toLowerCase());
     const prices = await axios.get(
-      `https://api.coingecko.com/api/v3/simple/price?ids=${coinNames.join(',')}&vs_currencies=usd`
+      `https://api.coingecko.com/api/v3/simple/price?ids=${coinNames.join(',')}&vs_currencies=usd`,
+      {
+        headers: {
+          'x-cg-demo-api-key': COINGECKO_API_KEY,
+          'accept': 'application/json'
+        }
+      }
     );
 
     const portfoliosWithPrices = portfolios.map(portfolio => {

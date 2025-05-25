@@ -1,6 +1,6 @@
 ### Variables
-@baseUrl = https://crypto-backend-21569344527.us-central1.run.app
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzQ4MTY4MzYzLCJleHAiOjE3NDgxNzU1NjN9.8ymEzMyyIA9iryK386qbBpit_g1JdyXyGJUDfdqxwbI
+@baseUrl = http://localhost:5000
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzQ4MTg1MTM0LCJleHAiOjE3NDgxOTIzMzR9.qXgYhvWdnT-HKnsTe4XGNehMzVgPKHARF5iZM-cwU2s
 
 
 ### Authentication ###
@@ -136,7 +136,7 @@ GET {{baseUrl}}/coins
 Authorization: Bearer {{token}}
 
 ### Get coin details
-GET {{baseUrl}}/coins/ethereum
+GET {{baseUrl}}/coins/bitcoin
 Authorization: Bearer {{token}}
 
 ### Get coin price history

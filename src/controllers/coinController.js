@@ -1,7 +1,9 @@
 const axios = require('axios');
+const { COINGECKO_API_KEY } = require('../config/api');
 
 const getTopCoins = async (req, res) => {
   try {
+    console.log('Using API Key:', COINGECKO_API_KEY);
     const response = await axios.get(
       'https://api.coingecko.com/api/v3/coins/markets',
       {
@@ -11,6 +13,10 @@ const getTopCoins = async (req, res) => {
           per_page: 10,
           page: 1,
           sparkline: false
+        },
+        headers: {
+          'x-cg-demo-api-key': COINGECKO_API_KEY,
+          'accept': 'application/json'
         }
       }
     );
@@ -45,6 +51,10 @@ const getCoinDetail = async (req, res) => {
           market_data: true,
           community_data: false,
           developer_data: false
+        },
+        headers: {
+          'x-cg-demo-api-key': COINGECKO_API_KEY,
+          'accept': 'application/json'
         }
       }
     );
@@ -102,6 +112,10 @@ const getCoinHistory = async (req, res) => {
         params: {
           vs_currency: 'usd',
           days
+        },
+        headers: {
+          'x-cg-demo-api-key': COINGECKO_API_KEY,
+          'accept': 'application/json'
         }
       }
     );
