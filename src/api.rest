@@ -1,5 +1,5 @@
 ### Variables
-@baseUrl = http://localhost:5000
+@baseUrl = https://crypto-backend-21569344527.us-central1.run.app
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzQ4MDk5NjQyLCJleHAiOjE3NDg3MDQ0NDJ9.Pxv2xwWJnjYs7NqYKZIgNdOx_-oN8IxdodfcWHOTGqk
 
 ### Authentication ###
