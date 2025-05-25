@@ -28,7 +28,7 @@ app.use((err, req, res, next) => {
 module.exports = app;
 
 // Database connection and server start
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 
 
 const startServer = async () => {
