@@ -1,6 +1,7 @@
 ### Variables
 @baseUrl = https://crypto-backend-21569344527.us-central1.run.app
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzQ4MTUwODMwLCJleHAiOjE3NDgxNTgwMzB9.ZSdl1YMjQsEiV8rSnX_JrtHwPGjNUJ4f4_Gj_-g9DGs
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzQ4MTY4MzYzLCJleHAiOjE3NDgxNzU1NjN9.8ymEzMyyIA9iryK386qbBpit_g1JdyXyGJUDfdqxwbI
+
 
 ### Authentication ###
 
@@ -49,7 +50,7 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-    "amount": 1000
+    "amount": 100000
 }
 
 ### Delete account
@@ -99,7 +100,7 @@ Content-Type: application/json
 
 {
     "coin_name": "bitcoin",
-    "amount_usd": 1000
+    "amount_usd": 10000
 }
 
 ### Sell coin
@@ -135,7 +136,7 @@ GET {{baseUrl}}/coins
 Authorization: Bearer {{token}}
 
 ### Get coin details
-GET {{baseUrl}}/coins/bitcoin
+GET {{baseUrl}}/coins/ethereum
 Authorization: Bearer {{token}}
 
 ### Get coin price history

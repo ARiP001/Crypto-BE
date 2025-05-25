@@ -34,6 +34,8 @@ const getTopCoins = async (req, res) => {
 const getCoinDetail = async (req, res) => {
   try {
     const { coin_name } = req.params;
+    console.log('Fetching coin detail for:', coin_name);
+    
     const response = await axios.get(
       `https://api.coingecko.com/api/v3/coins/${coin_name.toLowerCase()}`,
       {
@@ -46,6 +48,10 @@ const getCoinDetail = async (req, res) => {
         }
       }
     );
+
+    if (!response.data) {
+      throw new Error('No data received from CoinGecko API');
+    }
 
     const coin = {
       id: response.data.id,
@@ -64,7 +70,24 @@ const getCoinDetail = async (req, res) => {
 
     res.json(coin);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error('Error in getCoinDetail:', error);
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      res.status(error.response.status).json({ 
+        error: `CoinGecko API error: ${error.response.status} - ${error.response.statusText}` 
+      });
+    } else if (error.request) {
+      // The request was made but no response was received
+      res.status(503).json({ 
+        error: 'No response from CoinGecko API. Please try again later.' 
+      });
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      res.status(500).json({ 
+        error: `Error fetching coin data: ${error.message}` 
+      });
+    }
   }
 };
 
@@ -83,14 +106,23 @@ const getCoinHistory = async (req, res) => {
       }
     );
 
-    const prices = response.data.prices.map(([timestamp, price]) => ({
-      timestamp,
-      price
-    }));
-
-    res.json(prices);
+    // Return the data in the format expected by the frontend
+    res.json({ prices: response.data.prices });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error('Error in getCoinHistory:', error);
+    if (error.response) {
+      res.status(error.response.status).json({ 
+        error: `CoinGecko API error: ${error.response.status} - ${error.response.statusText}` 
+      });
+    } else if (error.request) {
+      res.status(503).json({ 
+        error: 'No response from CoinGecko API. Please try again later.' 
+      });
+    } else {
+      res.status(500).json({ 
+        error: `Error fetching coin history: ${error.message}` 
+      });
+    }
   }
 };
 
