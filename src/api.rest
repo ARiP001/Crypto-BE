@@ -1,6 +1,6 @@
 ### Variables
 @baseUrl = https://crypto-backend-21569344527.us-central1.run.app
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzQ4MDk5NjQyLCJleHAiOjE3NDg3MDQ0NDJ9.Pxv2xwWJnjYs7NqYKZIgNdOx_-oN8IxdodfcWHOTGqk
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzQ4MTUwODMwLCJleHAiOjE3NDgxNTgwMzB9.ZSdl1YMjQsEiV8rSnX_JrtHwPGjNUJ4f4_Gj_-g9DGs
 
 ### Authentication ###
 
