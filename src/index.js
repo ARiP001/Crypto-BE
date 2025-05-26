@@ -10,7 +10,8 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:3000',
-    'https://crypto-backend-21569344527.us-central1.run.app'
+    'https://crypto-backend-21569344527.us-central1.run.app',
+    'https://crypto-fe-dot-f-05-450706.uc.r.appspot.com'
   ],
   credentials: true
 }));
