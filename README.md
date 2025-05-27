@@ -1,4 +1,3 @@
-![image](https://github.com/user-attachments/assets/d7d19b0b-c4e7-4dd9-a57c-292f919d1419)
 # 📘 Crypto Portfolio Tracker API Documentation
 
 ## 🛡️ Authentication
