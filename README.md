@@ -248,4 +248,4 @@ GET /coins/bitcoin/history?days=7
 
 > 📌 **Catatan:**  
 > - Selalu kirim token JWT pada header `Authorization` untuk endpoint yang membutuhkan autentikasi.  
-> - Endpoint coin mengambil data dari [CoinGecko API]([https://www.coingecko.com/en/api](https://docs.coingecko.com/v3.0.1/reference/introduction)).
+> - Endpoint coin mengambil data dari [CoinGecko API](https://www.coingecko.com/en/api](https://docs.coingecko.com/v3.0.1/reference/introduction).
