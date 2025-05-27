@@ -1,6 +1,6 @@
 ### Variables
 @baseUrl = http://localhost:5000
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzQ4MTg1MTM0LCJleHAiOjE3NDgxOTIzMzR9.qXgYhvWdnT-HKnsTe4XGNehMzVgPKHARF5iZM-cwU2s
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNzQ4MzI5OTI1LCJleHAiOjE3NDgzMzcxMjV9.mD3jBaWTNwsCUadySNLvqrDl4gN8h3FrCLfTxUILOno
 
 
 ### Authentication ###
@@ -20,8 +20,8 @@ POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
 {
-    "email": "johndoe@gmail.com",
-    "password": "johndoe123"
+    "email": "daniel@gmail.com",
+    "password": "123456"
 }
 
 ### Logout
@@ -99,8 +99,8 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-    "coin_name": "bitcoin",
-    "amount_usd": 10000
+    "coin_name": "dogecoin",
+    "amount_usd": 1000
 }
 
 ### Sell coin

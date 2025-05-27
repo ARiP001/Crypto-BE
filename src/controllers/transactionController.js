@@ -18,18 +18,32 @@ const getTransactions = async (req, res) => {
 const buyCoin = async (req, res) => {
   try {
     const { coin_name, amount_usd } = req.body;
+    const coinId = coin_name.toLowerCase();
 
-    // Get current price from CoinGecko
-    const priceResponse = await axios.get(
-      `https://api.coingecko.com/api/v3/simple/price?ids=${coin_name.toLowerCase()}&vs_currencies=usd`,
-      {
-        headers: {
-          'x-cg-demo-api-key': COINGECKO_API_KEY,
-          'accept': 'application/json'
+    // Get current price and coin details from CoinGecko
+    const [priceResponse, coinDetailsResponse] = await Promise.all([
+      axios.get(
+        `https://api.coingecko.com/api/v3/simple/price?ids=${coinId}&vs_currencies=usd`,
+        {
+          headers: {
+            'x-cg-demo-api-key': COINGECKO_API_KEY,
+            'accept': 'application/json'
+          }
         }
-      }
-    );
-    const currentPrice = priceResponse.data[coin_name.toLowerCase()]?.usd;
+      ),
+      axios.get(
+        `https://api.coingecko.com/api/v3/coins/${coinId}`,
+        {
+          headers: {
+            'x-cg-demo-api-key': COINGECKO_API_KEY,
+            'accept': 'application/json'
+          }
+        }
+      )
+    ]);
+
+    const currentPrice = priceResponse.data[coinId]?.usd;
+    const imageUrl = coinDetailsResponse.data?.image?.large;
 
     if (!currentPrice) {
       return res.status(400).json({ error: 'Invalid coin name' });
@@ -59,7 +73,7 @@ const buyCoin = async (req, res) => {
         user_id: req.user.id,
         coin_name,
         total_coin: amountCoin,
-        image_url: `https://assets.coingecko.com/coins/images/1/large/${coin_name.toLowerCase()}.png`
+        image_url: imageUrl
       });
     } else {
       portfolio.total_coin = parseFloat(portfolio.total_coin) + amountCoin;
