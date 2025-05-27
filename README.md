@@ -1,4 +1,4 @@
-
+![image](https://github.com/user-attachments/assets/d7d19b0b-c4e7-4dd9-a57c-292f919d1419)
 # 📘 Crypto Portfolio Tracker API Documentation
 
 ## 🛡️ Authentication
@@ -248,4 +248,4 @@ GET /coins/bitcoin/history?days=7
 
 > 📌 **Catatan:**  
 > - Selalu kirim token JWT pada header `Authorization` untuk endpoint yang membutuhkan autentikasi.  
-> - Endpoint coin mengambil data dari [CoinGecko API](https://www.coingecko.com/en/api).
+> - Endpoint coin mengambil data dari [CoinGecko API]([https://www.coingecko.com/en/api](https://docs.coingecko.com/v3.0.1/reference/introduction)).
