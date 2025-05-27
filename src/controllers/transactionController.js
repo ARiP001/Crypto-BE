@@ -20,29 +20,18 @@ const buyCoin = async (req, res) => {
     const { coin_name, amount_usd } = req.body;
     const coinId = coin_name.toLowerCase();
 
-    // Get current price and coin details from CoinGecko
-    const [priceResponse, coinDetailsResponse] = await Promise.all([
-      axios.get(
-        `https://api.coingecko.com/api/v3/simple/price?ids=${coinId}&vs_currencies=usd`,
-        {
-          headers: {
-            'x-cg-demo-api-key': COINGECKO_API_KEY,
-            'accept': 'application/json'
-          }
+    // Get coin details from CoinGecko
+    const coinDetailsResponse = await axios.get(
+      `https://api.coingecko.com/api/v3/coins/${coinId}`,
+      {
+        headers: {
+          'x-cg-demo-api-key': COINGECKO_API_KEY,
+          'accept': 'application/json'
         }
-      ),
-      axios.get(
-        `https://api.coingecko.com/api/v3/coins/${coinId}`,
-        {
-          headers: {
-            'x-cg-demo-api-key': COINGECKO_API_KEY,
-            'accept': 'application/json'
-          }
-        }
-      )
-    ]);
+      }
+    );
 
-    const currentPrice = priceResponse.data[coinId]?.usd;
+    const currentPrice = coinDetailsResponse.data?.market_data?.current_price?.usd;
     const imageUrl = coinDetailsResponse.data?.image?.large;
 
     if (!currentPrice) {
@@ -99,10 +88,11 @@ const buyCoin = async (req, res) => {
 const sellCoin = async (req, res) => {
   try {
     const { coin_name, amount_coin } = req.body;
+    const coinId = coin_name.toLowerCase();
 
-    // Get current price from CoinGecko
-    const priceResponse = await axios.get(
-      `https://api.coingecko.com/api/v3/simple/price?ids=${coin_name.toLowerCase()}&vs_currencies=usd`,
+    // Get coin details from CoinGecko
+    const coinDetailsResponse = await axios.get(
+      `https://api.coingecko.com/api/v3/coins/${coinId}`,
       {
         headers: {
           'x-cg-demo-api-key': COINGECKO_API_KEY,
@@ -110,7 +100,7 @@ const sellCoin = async (req, res) => {
         }
       }
     );
-    const currentPrice = priceResponse.data[coin_name.toLowerCase()]?.usd;
+    const currentPrice = coinDetailsResponse.data?.market_data?.current_price?.usd;
 
     if (!currentPrice) {
       return res.status(400).json({ error: 'Invalid coin name' });
