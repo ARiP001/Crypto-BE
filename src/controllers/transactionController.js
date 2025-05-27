@@ -2,7 +2,7 @@ const { Transaction, Portfolio, User } = require('../models/Model');
 const axios = require('axios');
 const { Op } = require('sequelize');
 const { COINGECKO_API_KEY } = require('../config/api');
-
+//
 const getTransactions = async (req, res) => {
   try {
     const transactions = await Transaction.findAll({
